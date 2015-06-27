@@ -65,6 +65,19 @@ $(function() {
         })
     }
 
+    function max(items, field) {
+
+        var max = 0;
+
+        $.each(items, function(index, value) {
+            if(field in value && value[field] > max) {
+                max = value[field];
+            }
+        });
+
+        return max;
+    }
+
     function loadMarker(lat, lng) {
 
         var uri1 = uri.replace('{lat}', lat).replace('{lat}', lng);
@@ -76,25 +89,25 @@ $(function() {
                 return;
             }
 
+            var maxFav = max(data['photos'], 'count_faves');
+
             $.each(data['photos'], function( index, value ) {
 
                 value['latitude'] = parseFloat(value['latitude']);
                 value['longitude'] = parseFloat(value['longitude']);
 
-                var weight = 1;
-
                 if(!('url_o' in value)) {
-                    //console.log('invalid item ' + value['id'])
                     return;
                 }
 
-                if('weight' in value ) {
-                    weight = value["weight"];
+                var weight = ('count_faves' in value) ? ((maxFav / 100) * value['count_faves']) : 10;
+                if(weight == 0) {
+                    weight = 5;
                 }
 
                 heatMapData.push({
                     location: new google.maps.LatLng(value['latitude'], value['longitude']),
-                    weight: weight,
+                    weight: weight / 100,
                     _data: value
                 });
 
@@ -105,7 +118,7 @@ $(function() {
 
             });
 
-            initialize()
+            initialize();
 
             console.log(heatMapData.length)
         });
