@@ -2,6 +2,11 @@
 
 $(function() {
 
+    var uri = $('#map-canvas').data('uri');
+    if (typeof uri === 'undefined') {
+        uri = 'marker.json';
+    }
+
     function search(address, fn) {
 
         console.log('address search ' + address);
@@ -40,16 +45,31 @@ $(function() {
 
     var centerMarker;
 
+    function collectNearestImages(lat, lng, max, fn) {
+
+        var uri1 = uri.replace('{lat}', lat).replace('{lat}', lng);
+
+        $.get(uri1, {'lat': lat, 'lng': lng, 'radius': q}, function(data) {
+
+            var mySort = data['photos'].filter(function(item) {
+                return 'url_o' in item;
+            });
+
+            mySort.sort(function(a, b) {
+                return b['count_faves'] - a['count_faves'];
+            });
+
+            var items = mySort.slice(0, max);
+
+            fn(items);
+        })
+    }
+
     function loadMarker(lat, lng) {
 
-        var uri = $('#map-canvas').data('uri');
-        if (typeof uri === 'undefined') {
-            uri = 'marker.json';
-        }
+        var uri1 = uri.replace('{lat}', lat).replace('{lat}', lng);
 
-        uri = uri.replace('{lat}', lat).replace('{lat}', lng);
-
-        $.get(uri, {'lat': lat, 'lng': lng, 'q': q}, function( data ) {
+        $.get(uri1, {'lat': lat, 'lng': lng, 'q': q}, function( data ) {
 
             if(!('photos' in data)) {
                 alert('foo no photos');
@@ -132,8 +152,21 @@ $(function() {
                 google.maps.event.addListener(marker, 'click', function() {
                     var modal = $('#myModal');
 
+                    var imgRows = '';
+
+                    collectNearestImages(value['_data']['latitude'], value['_data']['longitude'], 5, function(items) {
+
+                        $.each(items, function(index, value) {
+                            imgRows += '<div class="col-md-6"><img class="img-responsive" src="' + value['url_o']  + '"></div>';
+                        });
+
+                        modal.find('.modal-body .sub-image').html(imgRows);
+
+                    });
+
 
                     modal.find('.modal-body .image').html('<img class="img-responsive" src="' + value['_data']['url_o'] + '">');
+
 
                     if(typeof value['_data']['description']['_content'] !== 'undefined' && value['_data']['description']['_content'].length > 0) {
                         modal.find('.modal-title').html(value['_data']['title']);
@@ -150,6 +183,7 @@ $(function() {
                     var desc = truncate(p.join(' - '), 60);
 
                     modal.find('.desc').html(desc);
+                    modal.find('.views').html('<small>Views: ' + value['_data']['views'] + "</small>");
                     modal.modal('show');
 
                 });
