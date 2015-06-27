@@ -32,7 +32,12 @@ $(function() {
 
     function loadMarker(lat, lng) {
 
-        $.get("marker.json", {'lat': lat, 'lng': lng}, function( data ) {
+        var uri = $('map-canvas').data('uri');
+        if (typeof uri === 'undefined') {
+            uri = 'marker.json';
+        }
+
+        $.get(uri, {'lat': lat, 'lng': lng}, function( data ) {
 
             if(!('photos' in data)) {
                 alert('foo no photos');
@@ -46,7 +51,12 @@ $(function() {
 
                 var weight = 1;
 
-                if( "weight" in value ) {
+                if(!('url_o' in value)) {
+                    //console.log('invalid item ' + value['id'])
+                    return;
+                }
+
+                if('weight' in value ) {
                     weight = value["weight"];
                 }
 
@@ -77,7 +87,7 @@ $(function() {
 
     function initialize() {
         var mapOptions = {
-            zoom: 8,
+            zoom: 9,
             center: centerMarker
             //mapTypeId: google.maps.MapTypeId.SATELLITE
         };
@@ -95,9 +105,27 @@ $(function() {
         var items = getVisibleItems(heatMapData, 4);
 
         $.each(items, function( index, value ) {
-            console.log(value['_data'])
-            var icon = new MapLocationIcon(value['_data']);
-            icon.setMap(map);
+
+            var img = 'http://placehold.it/50x50';
+            if('url_o' in value['_data']) {
+                img = value['_data']['url_o'];
+            }
+
+            var marker = new RichMarker({
+                position: value['location'],
+                map: map,
+                draggable: false,
+                content: '<div class="map-img-box-thumbnail"><img src="' + img + '"></div>'
+            });
+
+            if('url_o' in value['_data']) {
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    alert(value['_data']['url_o']);
+                });
+
+            }
+
         });
 
     }
