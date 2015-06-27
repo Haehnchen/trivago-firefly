@@ -4,7 +4,10 @@ class Search(db.Model):
     __tablename__ = 'spots'
     id = db.Column(db.Integer, primary_key=True)
     search_string = db.Column(db.String)
-    json_comtent = db.Column(db.String)
+    lat = db.Column(db.Float)
+    lon = db.Column(db.Float)
+    location_name = db.Column(db.String)
+    json_result = db.Column(db.String)
 
 class Photo(db.Model):
     __tablename__ = 'photos'
