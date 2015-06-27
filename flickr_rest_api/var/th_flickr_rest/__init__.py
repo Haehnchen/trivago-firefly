@@ -3,7 +3,8 @@ import flickrapi
 
 api_key = u'f58f073c2e4b81e2ea674ba21cf637c7'
 api_secret = u'01c00f92fc58fd2f'
-flickr = flickrapi.FlickrAPI(api_key, api_secret, format='parsed-json')
+flickr = flickrapi.FlickrAPI(api_key, api_secret, format='parsed-json', cache=True)
+flickr.cache = flickrapi.SimpleCache(timeout=300, max_entries=1000)
 
 app = Flask(__name__)
 
