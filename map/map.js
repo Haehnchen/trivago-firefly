@@ -32,9 +32,17 @@ $(function() {
 
     function loadMarker(lat, lng) {
 
-        $.get("marker.json?", {'lat': lat, 'lng': lng}, function( data ) {
+        $.get("marker.json", {'lat': lat, 'lng': lng}, function( data ) {
 
-            $.each(data, function( index, value ) {
+            if(!('photos' in data)) {
+                alert('foo no photos');
+                return;
+            }
+
+            $.each(data['photos'], function( index, value ) {
+
+                value['latitude'] = parseFloat(value['latitude']);
+                value['longitude'] = parseFloat(value['longitude']);
 
                 var weight = 1;
 
@@ -43,19 +51,21 @@ $(function() {
                 }
 
                 heatMapData.push({
-                    location: new google.maps.LatLng(value['lat'], value['lng']),
+                    location: new google.maps.LatLng(value['latitude'], value['longitude']),
                     weight: weight,
                     _data: value
                 });
 
                 // first marker is center
                 if(!centerMarker) {
-                    centerMarker = new google.maps.LatLng(value['lat'], value['lng']);
+                    centerMarker = new google.maps.LatLng(value['latitude'], value['longitude']);
                 }
 
             });
 
             initialize()
+
+            console.log(heatMapData.length)
         });
     }
 
@@ -67,7 +77,7 @@ $(function() {
 
     function initialize() {
         var mapOptions = {
-            zoom: 13,
+            zoom: 8,
             center: centerMarker
             //mapTypeId: google.maps.MapTypeId.SATELLITE
         };
@@ -82,14 +92,49 @@ $(function() {
 
         heatmap.setMap(map);
 
-        for (i = 0; i < 1; i++) {
-            var num = getRandomInt(0, heatMapData.length - 1);
+        var items = getVisibleItems(heatMapData, 4);
 
-            var icon = new MapLocationIcon(heatMapData[num]['_data']);
+        $.each(items, function( index, value ) {
+            console.log(value['_data'])
+            var icon = new MapLocationIcon(value['_data']);
             icon.setMap(map);
+        });
+
+    }
+
+    function getVisibleItems(heatMapData, max) {
+
+        var items = [];
+
+        var i;
+        for (i = 0; i < max; i++) {
+            var num = getRandomInt(0, heatMapData.length - 1);
+            items.push(heatMapData[num]);
+        }
+
+        return items;
+
+        getRandomInt(0, 5);
+
+
+        var index;
+        for (index = 0; index < heatMapData.length; ++index) {
+
+            // replace with field catch
+            if(getRandomInt(0, 5) == 1) {
+                items.push(heatMapData[index]);
+            }
+
+            if(items.length == max) {
+                return items;
+            }
 
         }
+
+        return items;
     }
+
+
 
     function toggleHeatmap() {
         heatmap.setMap(heatmap.getMap() ? null : map);
