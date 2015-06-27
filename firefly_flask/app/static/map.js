@@ -47,7 +47,7 @@ $(function() {
 
     function collectNearestImages(lat, lng, max, fn) {
 
-        var uri1 = uri.replace('{lat}', lat).replace('{lat}', lng);
+        var uri1 = uri.replace('{lat}', lat).replace('{lng}', lng);
 
         $.get(uri1, {'lat': lat, 'lng': lng, 'radius': q}, function(data) {
 
@@ -139,7 +139,9 @@ $(function() {
         );
 
         heatmap = new google.maps.visualization.HeatmapLayer({
-            data: heatMapData
+            data: heatMapData,
+            radius: 35,
+            opacity: 0.8
         });
 
         heatmap.setMap(map);
