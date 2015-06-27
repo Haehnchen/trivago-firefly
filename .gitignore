@@ -15,3 +15,6 @@ vim/bundle
 
 # Ignore vim/tmp
 vim/tmp~
+
+# and also our idea devs :)
+.idea/
