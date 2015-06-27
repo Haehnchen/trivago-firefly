@@ -80,6 +80,9 @@ $(function() {
     }
 
 
+    $('#pic-content').on('click', function() {
+        $(this).removeClass('vis');
+    });
 
 
     // Adding 500 Data Points
@@ -121,7 +124,10 @@ $(function() {
             if('url_o' in value['_data']) {
 
                 google.maps.event.addListener(marker, 'click', function() {
-                    alert(value['_data']['url_o']);
+
+                    $('#pic-content').addClass('vis');
+                    $('#pic-content').find('.content').html('<img src=" ' + value['_data']['url_o'] + '">')
+
                 });
 
             }

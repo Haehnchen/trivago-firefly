@@ -40,6 +40,28 @@ html, body, #map-canvas {
     transition: all 0.5s ease-in-out;
 }
 
+#pic-content.vis {
+    z-index: 5000;
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0, 0.8);
+    padding: 50px;
+    display: block;
+}
+
+#pic-content {
+    display:none;
+}
+
+#pic-content img {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+
 /*
 .map-img-box-thumbnail img {
     display:block;
