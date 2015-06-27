@@ -45,7 +45,7 @@ $(function() {
 
     var centerMarker;
 
-    function collectNearestImages(lat, lng, max, radius, sfn) {
+    function collectNearestImages(lat, lng, max, radius, fn) {
 
         var uri1 = uri.replace('{lat}', lat).replace('{lng}', lng);
 
