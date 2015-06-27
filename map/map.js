@@ -37,6 +37,8 @@ $(function() {
             uri = 'marker.json';
         }
 
+        uri = uri.replace('{lat}', lat).replace('{lat}', lng);
+
         $.get(uri, {'lat': lat, 'lng': lng}, function( data ) {
 
             if(!('photos' in data)) {
