@@ -1,0 +1,17 @@
+env
+.DS_Store
+#tmux ignores
+*.log
+
+# VIM ignores
+.*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+# Ignore vim/bundles
+vim/bundle
+
+# Ignore vim/tmp
+vim/tmp~
