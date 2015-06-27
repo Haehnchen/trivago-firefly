@@ -28,4 +28,4 @@ def photos(lat=None, lon=None):
     return jsonify({'photos': data['photos']['photo']})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
