@@ -2,7 +2,7 @@
 
 //creating the class to exntend the google map OverlayView class
 function MapLocationIcon(item){
-    this.pos = new google.maps.LatLng(item['lat'], item['lng']);
+    this.pos = new google.maps.LatLng(item['latitude'], item['longitude']);
     this.item = item;
 }
 
@@ -16,8 +16,8 @@ MapLocationIcon.prototype.onAdd= function(){
 
     var img = 'http://placehold.it/50x50';
 
-    if('thumbnail' in this.item) {
-        img = this.item['thumbnail'];
+    if('url_o' in this.item) {
+        img = this.item['url_o'];
     }
 
     $(div).html('<div class="map-img-box-thumbnail"><img src="' + img + '"></div>');
