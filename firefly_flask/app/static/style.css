@@ -57,7 +57,7 @@ html, body, #map-canvas {
 }
 
 #pic-content img {
-    max-width: 100%;
+    max-width: 30%;
     margin: 0 auto;
 }
 
@@ -78,3 +78,8 @@ html, body, #map-canvas {
     float:left;
 }
 */
+
+#pic-header {
+    background: url(/static/firefly_180.png) right bottom no-repeat;
+    padding: 15px;
+}

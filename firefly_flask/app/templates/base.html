@@ -1,3 +1,4 @@
+
 {% extends "bootstrap/base.html" %}
 
 {% block title %}Visit the firefly{% endblock %}
@@ -18,11 +19,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">Catch the firefly</a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">Visit the firefly</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('main.about') }}">About</a></li>
+                <li><a href="{{ url_for('main.why') }}">Why firefly?</a></li>
+
+
+
             </ul>
         </div>
     </div>
@@ -40,7 +46,8 @@
 
     {% block page_content %}{% endblock %}
 </div>
-{% endblock %}
+  {% endblock %}
+
 
 {% block scripts %}
 {{ super() }}

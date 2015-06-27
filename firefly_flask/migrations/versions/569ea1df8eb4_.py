@@ -1,13 +1,13 @@
 """empty message
 
-Revision ID: 129661a13049
+Revision ID: 569ea1df8eb4
 Revises: None
-Create Date: 2015-06-27 20:16:44.208170
+Create Date: 2015-06-27 22:14:46.770763
 
 """
 
 # revision identifiers, used by Alembic.
-revision = '129661a13049'
+revision = '569ea1df8eb4'
 down_revision = None
 
 from alembic import op
@@ -19,7 +19,10 @@ def upgrade():
     op.create_table('spots',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('search_string', sa.String(), nullable=True),
-    sa.Column('json_comtent', sa.String(), nullable=True),
+    sa.Column('lat', sa.Float(), nullable=True),
+    sa.Column('lon', sa.Float(), nullable=True),
+    sa.Column('location_name', sa.String(), nullable=True),
+    sa.Column('json_result', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('photos',
@@ -35,7 +38,7 @@ def upgrade():
     sa.Column('username', sa.String(), nullable=True),
     sa.Column('photo_url', sa.String(), nullable=True),
     sa.Column('search_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['search_id'], [u'spots.id'], ),
+    sa.ForeignKeyConstraint(['search_id'], ['spots.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     ### end Alembic commands ###
