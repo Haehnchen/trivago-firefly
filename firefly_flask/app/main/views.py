@@ -21,7 +21,7 @@ def search(search_query = None):
         return redirect(url_for('main.search', search_query=form.search_query.data))
     form.search_query.data = search_query
     #result = Search.query.join(Photo).filter(Search.id==Photo.search_id).filter(Search.search_string == search_query).all()
-    result = requests.get('http://tekkie.devops.wtf/photos/%s/%s'%(lat,lon)).json()
+    result = requests.get('http://visitfirefly.de/photos/%s/%s'%(lat,lon)).json()
     return render_template('search.html',form = form, query = search_query,result = result)
 
 @main.route('/about')
