@@ -91,12 +91,6 @@ $(function() {
         });
     }
 
-
-    $('#pic-content').on('click', function() {
-        $(this).removeClass('vis');
-    });
-
-
     // Adding 500 Data Points
     var map, pointarray, heatmap;
 
@@ -136,9 +130,27 @@ $(function() {
             if('url_o' in value['_data']) {
 
                 google.maps.event.addListener(marker, 'click', function() {
+                    var modal = $('#myModal');
 
-                    $('#pic-content').addClass('vis');
-                    $('#pic-content').find('.content').html('<img src=" ' + value['_data']['url_o'] + '">')
+
+                    modal.find('.modal-body .image').html('<img class="img-responsive" src="' + value['_data']['url_o'] + '">');
+
+                    if(typeof value['_data']['description']['_content'] !== 'undefined' && value['_data']['description']['_content'].length > 0) {
+                        modal.find('.modal-title').html(value['_data']['title']);
+                    } else {
+                        modal.find('.modal-title').html('&nbsp;');
+                    }
+
+
+                    var p = ['<b>' + value['_data']['ownername'] + '</b>'];
+                    if(typeof value['_data']['description']['_content'] !== 'undefined') {
+                        p.push(value['_data']['description']['_content']);
+                    }
+
+                    var desc = truncate(p.join(' - '), 60);
+
+                    modal.find('.desc').html(desc);
+                    modal.modal('show');
 
                 });
 
@@ -228,3 +240,9 @@ $(function() {
 
 
 });
+
+
+var truncate = function (str, limit) {
+    return jQuery.trim(str).substring(0, limit)
+            .split(" ").slice(0, -1).join(" ") + "...";
+};
