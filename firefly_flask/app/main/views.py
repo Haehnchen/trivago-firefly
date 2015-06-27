@@ -26,5 +26,12 @@ def search(search_query = None):
         lon = 6.4
         #result = requests.get('http://tekkie.devops.wtf/photos/%s/%s'%(lat,lon)).json()
         # in DB schreiben
-
     return render_template('search.html',form = form, query = search_query,result = result)
+
+@main.route('/about')
+def about():
+    return render_template('about.html')
+
+@main.route('/why')
+def why():
+    return render_template('why.html')

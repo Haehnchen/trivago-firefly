@@ -1,3 +1,4 @@
+
 {% extends "bootstrap/base.html" %}
 
 {% block title %}Visit the firefly{% endblock %}
@@ -23,6 +24,11 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('main.about') }}">About</a></li>
+                <li><a href="{{ url_for('main.why') }}">Why firefly?</a></li>
+
+
+
             </ul>
         </div>
     </div>
@@ -40,8 +46,10 @@
 
     {% block page_content %}{% endblock %}
 </div>
-{% endblock %}
+  {% endblock %}
 
+
+{% endblock %}
 {% block scripts %}
 {{ super() }}
 {{ moment.include_moment() }}
