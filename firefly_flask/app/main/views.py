@@ -20,13 +20,7 @@ def search(search_query = None):
     if form.validate_on_submit():
         return redirect(url_for('main.search', search_query=form.search_query.data))
     form.search_query.data = search_query
-<<<<<<< HEAD
     return render_template('search.html',form = form, query = search_query)
-=======
-    #result = Search.query.join(Photo).filter(Search.id==Photo.search_id).filter(Search.search_string == search_query).all()
-    result = requests.get('http://visitfirefly.de/photos/%s/%s'%(lat,lon)).json()
-    return render_template('search.html',form = form, query = search_query,result = result)
->>>>>>> 27b0b7e9269c0a020615eabe505f7325144d0c6e
 
 @main.route('/about')
 def about():
