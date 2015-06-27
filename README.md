@@ -6,8 +6,6 @@ You arrived in a new city or you are planning your next trip. You are a photo gu
 Use "Firefly" to get good impressions for your next "quality" photo spots.
 Firefly helps you to find good, not mainstreamed locations for photos.
 
-to make photos from good places, but no typical mainstream tourist areas
-
 ## Team members
 * [Daniel Espendiller](https://github.com/Haehnchen)
 * [Markus Rekkenbeil](https://github.com/bionix)
