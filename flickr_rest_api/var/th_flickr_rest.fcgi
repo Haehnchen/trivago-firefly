@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from flup.server.fcgi import WSGIServer
 from th_flickr_rest import app
 
