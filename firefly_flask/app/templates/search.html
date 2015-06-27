@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} catchthefirefly.com - Find hiden places to take great pictures{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+{% if not query %} <h1>Welcome to Catch the firefly!</h1> Type a destination or Zipcode to find hidden places to take great photos!<br></br>{% endif %}
+<div class="container-fluid">
+{{ wtf.quick_form(form) }}
+</div>
+</div>
+
+<h1>{% if db_result %} Result for {{ query }}{% else %} {% if query %} No result for {{ query }} in Database! {% else %}  {% endif %}{% endif %}</h1>
+
+{% if db_result %} {{ db_result }}{% else %} {% endif %}
+
+{% endblock %}
