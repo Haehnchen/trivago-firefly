@@ -8,13 +8,27 @@ from .forms import SearchForm
 def index():
     form = SearchForm()
     if form.validate_on_submit():
-        query = form.name.data
-        if query:
-            db_result = Search.query.join(Photo).filter(Search.id==Photo.search_id).filter(Search.search_string == query).all()
-            print db_result
-        else:
-            db_result = None
-        return render_template('search.html',form = form, db_result = db_result, query = query)
+        search_query = form.search_query.data
+        return redirect(url_for('main.search',search_query = search_query))
     else:
+        return render_template('index.html',form = form)
+
+@main.route('/search/', methods=['GET', 'POST'])
+@main.route('/search/<search_query>', methods=['GET', 'POST'])
+def search(search_query = None):
+    if search_query:
+        form = SearchForm()
+        form.search_query.data = search_query
+        db_result = Search.query.join(Photo).filter(Search.id==Photo.search_id).filter(Search.search_string == search_query).all()
+
+        if form.validate_on_submit():
+            return redirect(url_for('main.search',search_query = form.search_query.data))
+        else:
+            return render_template('search.html',form = form,db_result = db_result)
+
+        form.search_query.data = search_query
+        return render_template('search.html',form = form,db_result = db_result, query = search_query)
+    else:
+        form = SearchForm()
         return render_template('search.html',form = form)
 
