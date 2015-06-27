@@ -45,11 +45,11 @@ $(function() {
 
     var centerMarker;
 
-    function collectNearestImages(lat, lng, max, fn) {
+    function collectNearestImages(lat, lng, max, radius, sfn) {
 
         var uri1 = uri.replace('{lat}', lat).replace('{lng}', lng);
 
-        $.get(uri1, {'lat': lat, 'lng': lng, 'radius': q}, function(data) {
+        $.get(uri1, {'lat': lat, 'lng': lng, 'radius': radius}, function(data) {
 
             var mySort = data['photos'].filter(function(item) {
                 return 'url_o' in item;
@@ -80,7 +80,8 @@ $(function() {
 
     function loadMarker(lat, lng) {
 
-        var uri1 = uri.replace('{lat}', lat).replace('{lat}', lng);
+        var uri1 = uri.replace('{lat}', lat);
+        uri1 = uri1.replace('{lng}', lng);
 
         $.get(uri1, {'lat': lat, 'lng': lng, 'q': q}, function( data ) {
 
@@ -169,7 +170,7 @@ $(function() {
 
                     var imgRows = '';
 
-                    collectNearestImages(value['_data']['latitude'], value['_data']['longitude'], 5, function(items) {
+                    collectNearestImages(value['_data']['latitude'], value['_data']['longitude'], 5, 10, function(items) {
 
                         $.each(items, function(index, value) {
                             imgRows += '<div class="col-md-6"><img class="img-responsive" src="' + value['url_o']  + '"></div>';
