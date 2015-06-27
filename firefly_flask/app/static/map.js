@@ -4,11 +4,15 @@ $(function() {
 
     function search(address, fn) {
 
+        console.log('address search ' + address);
+
         var geocoder = new google.maps.Geocoder();
 
         geocoder.geocode({ 'address': address }, function (results, status) {
 
             if (status == google.maps.GeocoderStatus.OK) {
+
+                console.log(results[0].geometry.location);
 
                 fn({
                     'lat': results[0].geometry.location.lat(),
@@ -22,9 +26,15 @@ $(function() {
         });
     }
 
-    search('reken', function(loc) {
+    var q = $('#map-canvas').data('q');
+    if (typeof q === 'undefined') {
+        alert('The q is missing');
+        return;
+    }
+
+    search(q, function(loc) {
         loadMarker(loc.lat, loc.lng);
-    })
+    });
 
     var heatMapData = [];
 
@@ -32,12 +42,14 @@ $(function() {
 
     function loadMarker(lat, lng) {
 
-        var uri = $('map-canvas').data('uri');
+        var uri = $('#map-canvas').data('uri');
         if (typeof uri === 'undefined') {
             uri = 'marker.json';
         }
 
-        $.get(uri, {'lat': lat, 'lng': lng}, function( data ) {
+        uri = uri.replace('{lat}', lat).replace('{lat}', lng);
+
+        $.get(uri, {'lat': lat, 'lng': lng, 'q': q}, function( data ) {
 
             if(!('photos' in data)) {
                 alert('foo no photos');
