@@ -1,4 +1,2 @@
-# project
-The real name will come...
-
-Trivago Hackathon "Firefly"
+# Trivago Hackathon "Firefly"
+![Image of Firefly](https://github.com/TrivagoHackathonFirefly/project/blob/master/images/firefly.png)
