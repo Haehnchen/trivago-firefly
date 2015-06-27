@@ -12,16 +12,16 @@
 </div>
 </div>
 
-<h1>{% if db_result %}
+<h1>{% if result %}
         Result for {{ query }}
     {% else %} 
         {% if query %} No result for {{ query }} in Database! 
     {% else %}  
     {% endif %}{% endif %}</h1>
 
-{% if db_result %} {{ db_result }}{% else %} {% endif %}
+{% if result %} {{ result }}{% else %} {% endif %}
 
-<div id="map-canvas"></div>
+<div id="map-canvas" data-uri="http://tekkie.devops.wtf/photos/{lat}/{lng}" data-q="{{ query }}"></div>
 
 <div id="pic-content">
     <div class="content">
@@ -34,6 +34,6 @@
 {% block scripts %}
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization"></script>
-<script src="richmarker.js"></script>
-<script src="map.js"></script>
+<script src="http://tekkie.devops.wtf/static/richmarker.js"></script>
+<script src="http://tekkie.devops.wtf/static/map.js"></script>
 {% endblock %}

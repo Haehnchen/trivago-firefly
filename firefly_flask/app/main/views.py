@@ -3,6 +3,7 @@ from .. import db
 from ..models import  Search,Photo
 from . import main
 from .forms import SearchForm
+import requests
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -19,5 +20,10 @@ def search(search_query = None):
     if form.validate_on_submit():
         return redirect(url_for('main.search', search_query=form.search_query.data))
     form.search_query.data = search_query
-    db_result = Search.query.join(Photo).filter(Search.id==Photo.search_id).filter(Search.search_string == search_query).all()
-    return render_template('search.html',form = form,db_result = db_result, query = search_query)
+    result = Search.query.join(Photo).filter(Search.id==Photo.search_id).filter(Search.search_string == search_query).all()
+    if len(result) < 1:
+        lat = 51.19
+        lon = 6.4
+        #result = requests.get('http://tekkie.devops.wtf/photos/%s/%s'%(lat,lon)).json()
+
+    return render_template('search.html',form = form, query = search_query,result = result)
