@@ -1,0 +1,28 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Heatmaps</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css">
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization"></script>
+    <script src="MapLocationIcon.js"></script>
+    <script src="map.js"></script>
+
+</head>
+
+<body>
+<div id="panel">
+    <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+    <button onclick="changeGradient()">Change gradient</button>
+    <button onclick="changeRadius()">Change radius</button>
+    <button onclick="changeOpacity()">Change opacity</button>
+</div>
+<div id="map-canvas"></div>
+</body>
+</html>
+
