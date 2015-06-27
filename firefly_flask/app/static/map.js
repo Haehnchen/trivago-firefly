@@ -152,6 +152,13 @@ $(function() {
 
         var items = [];
 
+        var mySort = heatMapData;
+        mySort.sort(function(a, b) {
+            return b['_data']['count_faves'] - a['_data']['count_faves'];
+        });
+
+        return mySort.slice(0, max);
+
         var i;
         for (i = 0; i < max; i++) {
             var num = getRandomInt(0, heatMapData.length - 1);
