@@ -13,7 +13,7 @@ SECRET_KEY = 'dasdhaidUFOIHEzr'
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('mysql://firefly:jsdfgizs78UBCJAFK@localhost/firefly', convert_unicode=True, echo=False)
+engine = create_engine('mysql://firefly:jsdfgizs78UBCJAFK@localhost/firefly?charset=utf8', convert_unicode=True, echo=False)
 
 Base = declarative_base()
 Base.metadata.reflect(engine)
