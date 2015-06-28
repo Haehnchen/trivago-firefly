@@ -27,9 +27,6 @@
     </div>
 </div>
 
-
-<div id="map-canvas" data-uri="http://visitfirefly.de/photos/{lat}/{lng}" data-q="{{ query }}"></div>
-
 <div class="map-canvas-wrap">
     <div id="map-canvas" data-uri="http://visitfirefly.de/photos/{lat}/{lng}" data-q="{{ query }}"></div>
 </div>
@@ -69,7 +66,8 @@
 
 {% block scripts %}
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization,places"></script>
 <script src="http://visitfirefly.de/static/richmarker.js"></script>
 <script src="http://visitfirefly.de/static/map.js"></script>
 {% endblock %}
