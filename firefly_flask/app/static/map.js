@@ -328,7 +328,29 @@ $(function() {
         var desc = truncate(p.join(' - '), 60);
 
         modal.find('.desc').html(desc);
-        modal.find('.views').html('<small>Views: ' + value['_data']['views'] + "</small>");
+
+        var opts = {
+            'views': 'Views',
+            'count_faves': 'Favorites',
+            'count_comments': 'Comments'
+        };
+
+        var text = [];
+        $.each(opts, function(index, item) {
+            console.log(value)
+            console.log(item)
+            if(index in value['_data'] && value['_data'][index] > 0) {
+                text.push(item + ": " + value['_data'][index]);
+            }
+        });
+
+        if(text.length > 0) {
+            modal.find('.views').html('<small>' + text.join(' - ') + "</small>");
+        } else {
+            modal.find('.views').html('');
+        }
+
+
         modal.modal('show');
     }
 
