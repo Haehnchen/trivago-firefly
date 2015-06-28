@@ -16,6 +16,7 @@ def index():
 
 @main.route('/search/<search_query>', methods=['GET', 'POST'])
 def search(search_query = None):
+    search_query = search_query.title()
     form = SearchForm()
     if form.validate_on_submit():
         return redirect(url_for('main.search', search_query=form.search_query.data))
