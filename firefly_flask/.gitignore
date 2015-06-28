@@ -38,5 +38,8 @@ nosetests.xml
 # SQLite databases
 *.sqlite
 
+firefly_flask/migrations/versions/*.py
+
+
 # Virtual environment
 venv
