@@ -1,4 +1,5 @@
 from . import db
+from sqlalchemy.dialects.mysql import LONGTEXT
 
 class Search(db.Model):
     __tablename__ = 'spots'
@@ -7,7 +8,7 @@ class Search(db.Model):
     lat = db.Column(db.Float)
     lon = db.Column(db.Float)
     location_name = db.Column(db.Text)
-    json_result = db.Column(db.Text)
+    json_result = db.Column(LONGTEXT)
 
 class Photo(db.Model):
     __tablename__ = 'photos'

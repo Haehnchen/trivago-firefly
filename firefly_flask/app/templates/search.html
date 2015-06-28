@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
+
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %} visitfirefly.de - Find hiden places to take great pictures{% endblock %}
+{% block title %} visitfirefly.de - Find hidden places to take great pictures{% endblock %}
 
 {% block page_content %}
 
@@ -22,13 +23,16 @@
             <input class="btn btn-default" id="submit" name="submit" type="submit" value="Submit" style = 'display:inline;' ></div>
   </div>
 
-
 </form>
     </div>
 </div>
 
 
 <div id="map-canvas" data-uri="http://visitfirefly.de/photos/{lat}/{lng}" data-q="{{ query }}"></div>
+
+<div class="map-canvas-wrap">
+    <div id="map-canvas" data-uri="http://visitfirefly.de/photos/{lat}/{lng}" data-q="{{ query }}"></div>
+</div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
