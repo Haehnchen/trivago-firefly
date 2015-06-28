@@ -192,36 +192,7 @@ $(function() {
         });
 
         return mySort.slice(0, max);
-
-        var i;
-        for (i = 0; i < max; i++) {
-            var num = getRandomInt(0, heatMapData.length - 1);
-            items.push(heatMapData[num]);
-        }
-
-        return items;
-
-        getRandomInt(0, 5);
-
-
-        var index;
-        for (index = 0; index < heatMapData.length; ++index) {
-
-            // replace with field catch
-            if(getRandomInt(0, 5) == 1) {
-                items.push(heatMapData[index]);
-            }
-
-            if(items.length == max) {
-                return items;
-            }
-
-        }
-
-        return items;
     }
-
-
 
     function toggleHeatmap() {
         heatmap.setMap(heatmap.getMap() ? null : map);
