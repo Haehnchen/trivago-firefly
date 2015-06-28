@@ -6,8 +6,22 @@
 {% block page_content %}
     <div class="page-header">
         <h1><img src="/static/firefly.svg" alt="The Firefly Logo" class="img-responsive" style="width:10%; height:auto; align:right; padding-right:6px;">Welcome to visit the firefly!</h1> Type a <b>destination</b> to find hidden places to take great photos!<br></br>
+
             <div class="container-fluid">
-            {{ wtf.quick_form(form) }}
+        <form method="post" class="form" role="form">
+
+            <div class = 'col-xs-4 col-md-4'>
+
+            {{ form .hidden_tag()}}
+
+        <div class="form-group "><input class="form-control" id="search_query" name="search_query" type="text" placeholder = "Where do you want to search the firefly?"value="{{query}}" ></div>
+        </div>
+
+        <div class = 'col-xs-6 col-md-4'>
+
+            <input class="btn btn-default" id="submit" name="submit" type="submit" value="Submit" style = 'display:inline;' ></div>
+
             </div>
+
     </div>
 {% endblock %}
