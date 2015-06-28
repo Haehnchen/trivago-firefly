@@ -29,3 +29,7 @@ def about():
 @main.route('/why')
 def why():
     return render_template('why.html')
+
+@main.route('/tech_stack')
+def why():
+    return render_template('tech_stack.html')
