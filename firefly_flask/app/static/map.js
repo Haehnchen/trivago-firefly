@@ -364,10 +364,12 @@ $(function() {
         modal.find('.modal-body .hotel-ad').removeClass('hide');
 
         if(typeof result['image'] !== 'undefined') {
-            modal.find('.modal-body .hotel-ad img').attr('img', '');
+            modal.find('.modal-body .hotel-ad img').attr('src', '');
         } else {
-            modal.find('.modal-body .hotel-ad img').attr('img', 'http://www.immigrantspirit.com/wp-content/uploads/2014/08/building.jpg');
+            modal.find('.modal-body .hotel-ad img').attr('src', 'http://www.immigrantspirit.com/wp-content/uploads/2014/08/building.jpg');
         }
+
+        modal.find('.modal-body .hotel-ad .ad-dist').html(getRandomInt(5, 30) + ' km');
 
         if(typeof result['name'] !== 'undefined') {
             modal.find('.modal-body .hotel-ad .ad-title').html(truncate(result['name'], 90));
@@ -376,12 +378,11 @@ $(function() {
         }
 
         if(typeof result['description'] !== 'undefined') {
-            modal.find('.modal-body .hotel-ad .ad-title').html(truncate(result['description'], 120));
+            modal.find('.modal-body .hotel-ad .ad-dec').html(truncate(result['description'], 120));
         } else {
-            modal.find('.modal-body .hotel-ad .ad-title').html('');
+            modal.find('.modal-body .hotel-ad .ad-dec').html('');
         }
 
-        modal.find('.modal-body .hotel-ad .ad-dec').html(truncate(result['name'], 60));
         console.log(result);
     }
 
