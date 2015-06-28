@@ -54,9 +54,9 @@ def flickr_photos_to_db(photos, lat, lon, location_name):
     db_session.commit()
 
 if __name__ == '__main__':
-    cities = [u'Düsseldorf']
+    cities = [u'Berlin', u'Hamburg', u'München', u'Köln', u'Frankfurt', u'Stuttgart', u'Düsseldorf', u'Dortmund', u'Essen', u'Bremen', u'Leipzig', u'Dresden', u'Hannover', u'Nürnberg', u'Duisburg', u'Bochum', u'Wuppertal', u'Bielefeld', u'Bonn', u'Münster', u'Karlsruhe', u'Mannheim', u'Augsburg', u'Wiesbaden', u'Gelsenkirchen', u'Mönchengladbach', u'Braunschweig', u'Chemnitz', u'Aachen', u'Kiel', u'Halle', u'Magdeburg', u'Krefeld', u'Freiburg', u'Lübeck', u'Oberhausen', u'Erfurt', u'Mainz', u'Rostock', u'Kassel', u'Hagen', u'Saarbrücken', u'Hamm', u'Mülheim', u'Ludwigshafen', u'Potsdam', u'Leverkusen', u'Oldenburg', u'Osnabrück', u'Solingen', u'Herne', u'Neuss', u'Heidelberg', u'Darmstadt', u'Paderborn', u'Regensburg', u'Ingolstadt', u'Würzburg', u'Wolfsburg', u'Fürth', u'Ulm', u'Offenbach', u'Heilbronn', u'Pforzheim', u'Göttingen', u'Bottrop', u'Recklinghausen', u'Reutlingen', u'Koblenz', u'Bergisch Gladbach', u'Remscheid', u'Bremerhaven', u'Jena', u'Trier', u'Erlangen', u'Moers']
     for city in cities:
         print "Working on...", city
         location_name, city_lat, city_lon = get_lat_long(city)
-        city_photos = get_flickr_photos(lat=city_lat, lon=city_lon, location_name=location_name, radius=30, number_of_pages=2)
+        city_photos = get_flickr_photos(lat=city_lat, lon=city_lon, location_name=location_name, radius=30, number_of_pages=12)
         flickr_photos_to_db(photos=city_photos, lat=city_lat, lon=city_lon, location_name=location_name)
