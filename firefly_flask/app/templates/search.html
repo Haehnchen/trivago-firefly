@@ -12,15 +12,6 @@
 </div>
 </div>
 
-<h1>{% if result %}
-        Result for {{ query }}
-    {% else %}
-        {% if query %} No result for {{ query }} in Database!
-    {% else %}
-    {% endif %}{% endif %}</h1>
-
-{% if result %} {{ result }}{% else %} {% endif %}
-
 <div id="map-canvas" data-uri="http://visitfirefly.de/photos/{lat}/{lng}" data-q="{{ query }}"></div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
