@@ -294,6 +294,7 @@ $(function() {
 
         });
 
+        /*
         var service = new google.maps.places.PlacesService(map);
 
         service.nearbySearch({
@@ -309,6 +310,7 @@ $(function() {
             modalHotelAd(modal, results[0]);
 
         });
+        */
 
         modal.find('.modal-body .image').html('<img class="img-responsive" src="' + value['_data']['url_m'] + '">');
 
