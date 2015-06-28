@@ -31,5 +31,5 @@ def why():
     return render_template('why.html')
 
 @main.route('/tech_stack')
-def why():
+def tech_stack():
     return render_template('tech_stack.html')
