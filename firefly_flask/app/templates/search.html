@@ -2,15 +2,31 @@
 
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %} visitfirefly.de - Find hidden places to take great pictures{% endblock %}
+{% block title %} visitfirefly.de - Find hiden places to take great pictures{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
 
-<div class="container-fluid">
-{{ wtf.quick_form(form) }}
+<div class="page-header">
+    <div class="container-fluid">
+        <form method="post" class="form" role="form">
+
+            <div class = 'col-xs-4 col-md-4'>
+
+            {{ form .hidden_tag()}}
+
+        <div class="form-group "><input class="form-control" id="search_query" name="search_query" type="text" placeholder = "Where do you want to search the firefly?"value="{{query}}" ></div>
+        </div>
+
+        <div class = 'col-xs-6 col-md-4'>
+
+            <input class="btn btn-default" id="submit" name="submit" type="submit" value="Submit" style = 'display:inline;' ></div>
+  </div>
+
+
+</form>
+    </div>
 </div>
-</div>
+
 
 <div id="map-canvas" data-uri="http://visitfirefly.de/photos/{lat}/{lng}" data-q="{{ query }}"></div>
 
@@ -49,8 +65,7 @@
 
 {% block scripts %}
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization,places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization"></script>
 <script src="http://visitfirefly.de/static/richmarker.js"></script>
 <script src="http://visitfirefly.de/static/map.js"></script>
 {% endblock %}
