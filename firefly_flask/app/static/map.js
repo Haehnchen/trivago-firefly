@@ -37,6 +37,8 @@ $(function() {
         return;
     }
 
+    q = ucfirst(q)
+
     search(q, function(loc) {
         loadMarker(loc.lat, loc.lng);
     });
@@ -157,8 +159,8 @@ $(function() {
         $.each(items, function( index, value ) {
 
             var img = 'http://placehold.it/50x50';
-            if('url_o' in value['_data']) {
-                img = value['_data']['url_o'];
+            if('url_sq' in value['_data']) {
+                img = value['_data']['url_sq'];
             }
 
             var marker = new RichMarker({
@@ -168,7 +170,7 @@ $(function() {
                 content: '<div class="map-img-box-thumbnail"><img src="' + img + '"></div>'
             });
 
-            if('url_o' in value['_data']) {
+            if('url_sq' in value['_data']) {
 
                 google.maps.event.addListener(marker, 'click', function() {
                     openModal(value);
@@ -302,7 +304,7 @@ $(function() {
         collectNearestImages(value['_data']['latitude'], value['_data']['longitude'], 5, 10, function(items) {
 
             $.each(items, function(index, value) {
-                imgRows += '<div class="col-md-6"><img class="img-responsive" src="' + value['url_o']  + '"></div>';
+                imgRows += '<div class="col-md-6"><img class="img-responsive" src="' + value['url_sq']  + '"></div>';
             });
 
             modal.find('.modal-body .sub-image').html(imgRows);
@@ -310,7 +312,7 @@ $(function() {
         });
 
 
-        modal.find('.modal-body .image').html('<img class="img-responsive" src="' + value['_data']['url_o'] + '">');
+        modal.find('.modal-body .image').html('<img class="img-responsive" src="' + value['_data']['url_m'] + '">');
 
 
         if(typeof value['_data']['description']['_content'] !== 'undefined' && value['_data']['description']['_content'].length > 0) {
@@ -337,8 +339,6 @@ $(function() {
 
         var text = [];
         $.each(opts, function(index, item) {
-            console.log(value)
-            console.log(item)
             if(index in value['_data'] && value['_data'][index] > 0) {
                 text.push(item + ": " + value['_data'][index]);
             }
@@ -352,6 +352,13 @@ $(function() {
 
 
         modal.modal('show');
+    }
+
+    function ucfirst(str) {
+        str += '';
+        var f = str.charAt(0)
+            .toUpperCase();
+        return f + str.substr(1);
     }
 
 });

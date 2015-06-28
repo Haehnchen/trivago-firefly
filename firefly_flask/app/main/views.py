@@ -19,7 +19,7 @@ def search(search_query = None):
     form = SearchForm()
     if form.validate_on_submit():
         return redirect(url_for('main.search', search_query=form.search_query.data))
-    form.search_query.data = search_query
+    form.search_query.data = search_query.title()
     return render_template('search.html',form = form, query = search_query)
 
 @main.route('/about')
@@ -29,3 +29,7 @@ def about():
 @main.route('/why')
 def why():
     return render_template('why.html')
+
+@main.route('/tech_stack')
+def tech_stack():
+    return render_template('tech_stack.html')
