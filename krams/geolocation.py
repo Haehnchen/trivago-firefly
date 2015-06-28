@@ -53,5 +53,5 @@ if __name__ == '__main__':
     cities = [u'Düsseldorf']
     for city in cities:
         city_lat, city_lon = get_lat_long(city)
-        duesseldorf_photos = get_flickr_photos(city_lat, city_lon, radius=30, 10)
+        duesseldorf_photos = get_flickr_photos(lat=city_lat, lon=city_lon, radius=30, number_of_pages=10)
         flickr_photos_to_db(city_photos)
