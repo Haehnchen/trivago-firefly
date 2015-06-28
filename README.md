@@ -17,3 +17,8 @@ Firefly helps you to find good, not mainstreamed locations for photos - hidden p
 
 ## Date
 27th + 28th June 2015
+
+## Contact
+Please contact us directly!
+We have a project twitter account, but more for fun. ;-)
+[DEfirefly](https://twitter.com/DEfirefly)
