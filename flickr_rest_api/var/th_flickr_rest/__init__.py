@@ -53,6 +53,7 @@ def photos(lat=None, lon=None):
     from sqlalchemy.orm import scoped_session, sessionmaker, Query
     db_session = scoped_session(sessionmaker(bind=engine))
     existing_photos = db_session.query(Spot).filter(Spot.lat == lat, Spot.lon == lon).first()
+    print lat, type(lat), lon, type(lon), len(existing_photos), existing_photos
     if existing_photos:
         json_data = json.loads(existing_photos.json_result)
         return jsonify({'photos':json_data})
