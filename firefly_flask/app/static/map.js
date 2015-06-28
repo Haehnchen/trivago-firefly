@@ -2,6 +2,16 @@
 
 $(function() {
 
+    function setDIVHeight() {
+        var theDiv = $('.map-canvas-wrap');
+        var divTop = theDiv.offset().top;
+        var winHeight = $(window).height();
+        var divHeight = winHeight - divTop;
+        theDiv.height(divHeight);
+    }
+
+    setDIVHeight();
+
     var uri = $('#map-canvas').data('uri');
     if (typeof uri === 'undefined') {
         uri = 'marker.json';
