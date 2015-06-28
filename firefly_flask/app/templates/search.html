@@ -26,7 +26,7 @@
     </div>
 
 <div class="map-canvas-wrap">
-    <div id="map-canvas" data-uri="http://visitfirefly.de/photos/{lat}/{lng}" data-q="{{ query }}"></div>
+    <div id="map-canvas" data-uri="http://visitfirefly.de/photos/{lat}/{lng}" data-hotels="http://visitfirefly.de/hotels/{lat}/{lng}" data-q="{{ query }}"></div>
 </div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -44,6 +44,20 @@
 
                     <div class="col-md-4">
                         <div class="row sub-image"></div>
+                    </div>
+
+                </div>
+                <div class="hotel-ad hide">
+                    <hr>
+                    <div class="text-muted pull-right">Next Hotel</div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="http://lorempixel.com/400/200/" width="80">
+                        </div>
+                        <div class="col-md-6">
+                            <h2 style="font-size: 14px; margin:0; padding: 0; font-weight: bold" class="ad-title">Title</h2>
+                            <p class="ad-dec">Description</p>
+                        </div>
                     </div>
 
                 </div>

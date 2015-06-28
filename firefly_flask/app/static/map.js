@@ -280,6 +280,8 @@ $(function() {
 
         var modal = $('#myModal');
 
+        modal.find('.modal-body .hotel-ad').addClass('hide');
+
         var imgRows = '';
 
         collectNearestImages(value['_data']['latitude'], value['_data']['longitude'], 5, 10, function(items) {
@@ -292,6 +294,21 @@ $(function() {
 
         });
 
+        var service = new google.maps.places.PlacesService(map);
+
+        service.nearbySearch({
+            location: new google.maps.LatLng(value['_data']['latitude'], value['_data']['longitude']),
+            radius: 500,
+            types: ['lodging']
+        }, function callback(results, status) {
+
+            if(results.length == 0) {
+                return;
+            }
+
+            modalHotelAd(modal, results[0]);
+
+        });
 
         modal.find('.modal-body .image').html('<img class="img-responsive" src="' + value['_data']['url_m'] + '">');
 
@@ -340,6 +357,32 @@ $(function() {
         var f = str.charAt(0)
             .toUpperCase();
         return f + str.substr(1);
+    }
+
+    function modalHotelAd(modal, result) {
+
+        modal.find('.modal-body .hotel-ad').removeClass('hide');
+
+        if(typeof result['image'] !== 'undefined') {
+            modal.find('.modal-body .hotel-ad img').attr('img', '');
+        } else {
+            modal.find('.modal-body .hotel-ad img').attr('img', 'http://www.immigrantspirit.com/wp-content/uploads/2014/08/building.jpg');
+        }
+
+        if(typeof result['name'] !== 'undefined') {
+            modal.find('.modal-body .hotel-ad .ad-title').html(truncate(result['name'], 90));
+        } else {
+            modal.find('.modal-body .hotel-ad .ad-title').html('');
+        }
+
+        if(typeof result['description'] !== 'undefined') {
+            modal.find('.modal-body .hotel-ad .ad-title').html(truncate(result['description'], 120));
+        } else {
+            modal.find('.modal-body .hotel-ad .ad-title').html('');
+        }
+
+        modal.find('.modal-body .hotel-ad .ad-dec').html(truncate(result['name'], 60));
+        console.log(result);
     }
 
 });
