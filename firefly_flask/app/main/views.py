@@ -21,7 +21,7 @@ def search(search_query = None):
     if form.validate_on_submit():
         return redirect(url_for('main.search', search_query=form.search_query.data.title()))
     form.search_query.data = search_query.title()
-    return render_template('search.html',form = form, query = search_query)
+    return render_template('search.html',form = form, query = search_query.title())
 
 @main.route('/about')
 def about():
