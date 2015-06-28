@@ -37,6 +37,8 @@ $(function() {
         return;
     }
 
+    q = ucfirst(q)
+
     search(q, function(loc) {
         loadMarker(loc.lat, loc.lng);
     });
@@ -337,8 +339,6 @@ $(function() {
 
         var text = [];
         $.each(opts, function(index, item) {
-            console.log(value)
-            console.log(item)
             if(index in value['_data'] && value['_data'][index] > 0) {
                 text.push(item + ": " + value['_data'][index]);
             }
@@ -352,6 +352,13 @@ $(function() {
 
 
         modal.modal('show');
+    }
+
+    function ucfirst(str) {
+        str += '';
+        var f = str.charAt(0)
+            .toUpperCase();
+        return f + str.substr(1);
     }
 
 });
