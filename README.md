@@ -21,4 +21,5 @@ Firefly helps you to find good, not mainstreamed locations for photos - hidden p
 ## Contact
 Please contact us directly!
 We have a project twitter account, but more for fun. ;-)
-[DEfirefly](https://twitter.com/DEfirefly)
+
+[@DEfirefly](https://twitter.com/DEfirefly)
