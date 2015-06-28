@@ -145,6 +145,11 @@ $(function() {
             opacity: 0.8
         });
 
+        google.maps.event.addListener(map, 'click', function(e) {
+            var value = getNearestDistance(heatMapData, e.latLng.lat(), e.latLng.lng());
+            openModal(value);
+        });
+
         heatmap.setMap(map);
 
         var items = getVisibleItems(heatMapData, 4);
@@ -166,42 +171,7 @@ $(function() {
             if('url_o' in value['_data']) {
 
                 google.maps.event.addListener(marker, 'click', function() {
-                    var modal = $('#myModal');
-
-                    var imgRows = '';
-
-                    collectNearestImages(value['_data']['latitude'], value['_data']['longitude'], 5, 10, function(items) {
-
-                        $.each(items, function(index, value) {
-                            imgRows += '<div class="col-md-6"><img class="img-responsive" src="' + value['url_o']  + '"></div>';
-                        });
-
-                        modal.find('.modal-body .sub-image').html(imgRows);
-
-                    });
-
-
-                    modal.find('.modal-body .image').html('<img class="img-responsive" src="' + value['_data']['url_o'] + '">');
-
-
-                    if(typeof value['_data']['description']['_content'] !== 'undefined' && value['_data']['description']['_content'].length > 0) {
-                        modal.find('.modal-title').html(value['_data']['title']);
-                    } else {
-                        modal.find('.modal-title').html('&nbsp;');
-                    }
-
-
-                    var p = ['<b>' + value['_data']['ownername'] + '</b>'];
-                    if(typeof value['_data']['description']['_content'] !== 'undefined') {
-                        p.push(value['_data']['description']['_content']);
-                    }
-
-                    var desc = truncate(p.join(' - '), 60);
-
-                    modal.find('.desc').html(desc);
-                    modal.find('.views').html('<small>Views: ' + value['_data']['views'] + "</small>");
-                    modal.modal('show');
-
+                    openModal(value);
                 });
 
             }
@@ -287,7 +257,80 @@ $(function() {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+        var R = 6371; // Radius of the earth in km
+        var dLat = deg2rad(lat2-lat1);  // deg2rad below
+        var dLon = deg2rad(lon2-lon1);
+        var a =
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                Math.sin(dLon/2) * Math.sin(dLon/2)
+            ;
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c; // Distance in km
+        return d;
+    }
 
+    function deg2rad(deg) {
+        return deg * (Math.PI/180)
+    }
+
+    function getNearestDistance(heatMapData, lat, lng) {
+
+        var nearest;
+        var dist;
+
+        $.each(heatMapData, function(index, value) {
+
+            var cDist = getDistanceFromLatLonInKm(lat, lng, value['_data']['latitude'], value['_data']['longitude']);
+            if(!dist || cDist < dist) {
+                nearest = value;
+                dist = cDist;
+            }
+
+        });
+
+        return nearest;
+    }
+
+    function openModal(value) {
+
+        var modal = $('#myModal');
+
+        var imgRows = '';
+
+        collectNearestImages(value['_data']['latitude'], value['_data']['longitude'], 5, 10, function(items) {
+
+            $.each(items, function(index, value) {
+                imgRows += '<div class="col-md-6"><img class="img-responsive" src="' + value['url_o']  + '"></div>';
+            });
+
+            modal.find('.modal-body .sub-image').html(imgRows);
+
+        });
+
+
+        modal.find('.modal-body .image').html('<img class="img-responsive" src="' + value['_data']['url_o'] + '">');
+
+
+        if(typeof value['_data']['description']['_content'] !== 'undefined' && value['_data']['description']['_content'].length > 0) {
+            modal.find('.modal-title').html(value['_data']['title']);
+        } else {
+            modal.find('.modal-title').html('&nbsp;');
+        }
+
+
+        var p = ['<b>' + value['_data']['ownername'] + '</b>'];
+        if(typeof value['_data']['description']['_content'] !== 'undefined') {
+            p.push(value['_data']['description']['_content']);
+        }
+
+        var desc = truncate(p.join(' - '), 60);
+
+        modal.find('.desc').html(desc);
+        modal.find('.views').html('<small>Views: ' + value['_data']['views'] + "</small>");
+        modal.modal('show');
+    }
 
 });
 
