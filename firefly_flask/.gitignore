@@ -39,6 +39,7 @@ nosetests.xml
 *.sqlite
 
 firefly_flask/migrations/versions/*.py
+firefly_flask/migrations/versions/
 
 
 # Virtual environment
